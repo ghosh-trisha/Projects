@@ -1,0 +1,22 @@
+#bulb{
+    height: 300px;
+
+    /* to place middle */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#btn{
+    font-size: 30px;
+
+    /* to place middle */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main{
+    color: white;
+    background-color: black;
+}
