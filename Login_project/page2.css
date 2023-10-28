@@ -1,0 +1,32 @@
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:bold ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+h3{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:bold ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#heading{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+#foot{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#body{
+    margin-left: 550px;
+}
+#sub{
+    margin-left: 120px;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
