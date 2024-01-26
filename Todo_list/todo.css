@@ -1,0 +1,46 @@
+body {
+    text-align: center;
+    margin: 50px;
+}
+
+#todoList {
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#todoList ul {
+    padding: 0;
+}
+
+#todoList li {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    margin: 8px 0;
+    padding: 10px;
+}
+
+#newTask{
+    width: 53%;
+    padding: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+button {
+    background-color: #4caf50;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+#clearButton {
+    background-color: #ff3333;
+    margin-left: 8px;
+}
+input{
+    border-radius: 5px;
+}
