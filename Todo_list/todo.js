@@ -1,3 +1,5 @@
+loadTasks();
+
 function getTasksFromLocalStorage() {
     // Get tasks from local storage
     var tasksJson = localStorage.getItem("tasks");
