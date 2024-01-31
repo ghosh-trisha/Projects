@@ -1,5 +1,6 @@
+let user;
 document.addEventListener('DOMContentLoaded', function () {
-    let user = JSON.parse(localStorage.getItem("user"));
+     user = JSON.parse(localStorage.getItem("user"));
   
     if (user) {
       // User is logged in
@@ -27,13 +28,12 @@ function loginForm() {
     logForm.addEventListener('submit', function (event) {
       event.preventDefault();
   
-      var username = document.getElementById('username').value;
-      var password = document.getElementById('password').value;
-      var user = { username, password };
+      let username = document.getElementById('username').value;
+      let password = document.getElementById('password').value;
+        user = { username, password };
   
       // Save user to local storage
-    //   localStorage.setItem("tasks", JSON.stringify(user));
-    localStorage.setItem(username, JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
   
       // Render the to-do app
       loadTasks(user);
@@ -44,31 +44,29 @@ function loginForm() {
 
 function getTasksFromLocalStorage() {
     // Get tasks from local storage
-    // var tasksJson = localStorage.getItem("tasks");
-    var tasksJson = localStorage.getItem(username);
+    let tasksJson = localStorage.getItem(user.username+user.password);
     return JSON.parse(tasksJson) || [];
 }
 
 function saveTasksToLocalStorage(tasks) {
     // Save tasks to local storage
-    // localStorage.setItem("tasks", JSON.stringify(tasks));
-    localStorage.setItem(username, JSON.stringify(tasks));
+    localStorage.setItem(user.username+user.password, JSON.stringify(tasks));
 }
 
 function addTask() {
     // add the task to local storage
 
-    var taskInput = document.getElementById("newTask");
-    var taskText = taskInput.value.trim();
+    let taskInput = document.getElementById("newTask");
+    let taskText = taskInput.value.trim();
     if(taskText === ""){
         return;
     }
 
     // Get the tasks from local storage
-    var tasks = getTasksFromLocalStorage();
+    let tasks = getTasksFromLocalStorage();
 
     // Create a task object
-    var task = {
+    let task = {
       text: taskText,
       id: new Date().getTime(),
     };
@@ -79,7 +77,7 @@ function addTask() {
     // Save tasks to local storage
     saveTasksToLocalStorage(tasks);
 
-    // Clear the variable taskInput
+    // Clear the letiable taskInput
     taskInput.value = "";
 
     // Update the task list
@@ -114,7 +112,7 @@ function loadTasks(user) {
     let logBtn = document.getElementById('logoutBtn');
     logBtn.addEventListener("click", function () {
         // Remove user from local storage
-        localStorage.removeItem(user);
+        localStorage.removeItem("user");
     
         // show the login form
         loginForm();
@@ -122,43 +120,44 @@ function loadTasks(user) {
 }
 function display(){
     // Get the tasks from local storage
-    var tasks = getTasksFromLocalStorage();
+    let tasks = getTasksFromLocalStorage();
 
     // Get the tasks element means ul tag
-    var tasksElement = document.getElementById("tasks");
+    let tasksElement = document.getElementById("tasks");
 
     // Clear the existing tasks within the ul tag
     tasksElement.innerHTML = "";
 
     // Add each task to the list
     tasks.forEach(function (task) {
-      var li = document.createElement("li");
+      let li = document.createElement("li");
       li.innerHTML = `
         <span>${task.text}</span>
-        <button id="editTask">Edit</button>
-        <button id="removeTask">Remove</button>
+        <button id=${task.id+"editTask"}>Edit</button>
+        <button id=${task.id+"removeTask"}>Remove</button>
       `;
 
-        let editTaskBtn=document.getElementById('editTask');
+      tasksElement.appendChild(li);
+
+        let editTaskBtn=document.getElementById(`${task.id+"editTask"}`);
         editTaskBtn.addEventListener("click",function () {
             editTask(task.id);
           });
 
-        let removeTaskBtn=document.getElementById('removeTask');
+        let removeTaskBtn=document.getElementById(`${task.id+"removeTask"}`);
         removeTaskBtn.addEventListener("click",function () {
             removeTask(task.id);
           });
 
-      tasksElement.appendChild(li);
     });
 }
 
 function removeTask(id) {
     // Get the tasks from local storage
-    var tasks = getTasksFromLocalStorage();
+    let tasks = getTasksFromLocalStorage();
 
     // Remove the task with the given id
-    var updatedTasks = tasks.filter(function (task) {
+    let updatedTasks = tasks.filter(function (task) {
       return task.id !== id;
     });
 
@@ -171,15 +170,15 @@ function removeTask(id) {
 
 function editTask(id) {
     // Get the tasks from local storage
-    var tasks = getTasksFromLocalStorage();
+    let tasks = getTasksFromLocalStorage();
 
     // Find the task with the given ID
-    var taskToEdit = tasks.find(function (task) {
+    let taskToEdit = tasks.find(function (task) {
       return task.id === id;
     });
 
     // Prompt the user for a new task text
-    var newText = prompt("Edit task:", taskToEdit.text);
+    let newText = prompt("Edit task:", taskToEdit.text);
 
     // Check if the user entered a new text (and did not click Cancel)
     if (newText !== null) {
@@ -208,3 +207,4 @@ function clearAllTasks() {
         display();
     }
 }
+// localStorage.clear();
